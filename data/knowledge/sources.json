@@ -1,0 +1,22 @@
+{
+  "referenceOnly": true,
+  "description": "External materials Melissa may use to update the canonical Markdown knowledge base. The ingestion pipeline never downloads these URLs.",
+  "sources": [
+    {
+      "title": "Portfolio",
+      "url": "https://www.melissashi.com/"
+    },
+    {
+      "title": "Resume",
+      "url": "https://docs.google.com/document/d/1Fqb5aADwMucxJWs6w3dG7t9gxN_xnQDD/edit?usp=sharing"
+    },
+    {
+      "title": "LinkedIn",
+      "url": "https://www.linkedin.com/in/melissaxshi"
+    },
+    {
+      "title": "Medium article",
+      "url": "https://medium.com/design-at-exxonmobil/how-to-build-trust-with-clients-and-showcase-ux-value-in-a-short-time-50c1c7858211"
+    }
+  ]
+}

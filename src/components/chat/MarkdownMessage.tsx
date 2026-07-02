@@ -1,0 +1,24 @@
+import type { ReactNode } from "react";
+
+const INLINE_PATTERN = /(\*\*[^*]+\*\*|\[[^\]]+\]\((?:https?:\/\/|mailto:)[^)]+\))/g;
+const LINK_PATTERN = /^\[([^\]]+)\]\(((?:https?:\/\/|mailto:)[^)]+)\)$/;
+
+function renderInline(text: string): ReactNode[] {
+  return text.split(INLINE_PATTERN).filter(Boolean).map((part, index) => {
+    const link = part.match(LINK_PATTERN);
+    if (link) {
+      const external = link[2].startsWith("http");
+      return <a key={index} href={link[2]} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined} className="font-semibold text-brand underline decoration-brand/30 underline-offset-2 hover:decoration-brand">{link[1]}</a>;
+    }
+    if (part.startsWith("**") && part.endsWith("**")) return <strong key={index} className="font-bold text-ink">{part.slice(2, -2)}</strong>;
+    return part;
+  });
+}
+
+export function MarkdownMessage({ content }: { content: string }) {
+  return <div className="space-y-2">{content.split("\n").map((line, index) => {
+    if (!line.trim()) return <div key={index} className="h-1" aria-hidden="true" />;
+    if (line.startsWith("- ")) return <div key={index} className="flex gap-2"><span aria-hidden="true">•</span><span>{renderInline(line.slice(2))}</span></div>;
+    return <p key={index}>{renderInline(line)}</p>;
+  })}</div>;
+}

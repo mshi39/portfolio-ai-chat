@@ -1,0 +1,2 @@
+import { AiAvatar } from "./AiAvatar";
+export function TypingIndicator() { return <div className="flex gap-3" aria-label="Melissa's AI is typing" role="status"><AiAvatar /><div className="flex items-center gap-1 rounded-2xl bg-brand-soft px-4 py-3">{[0, 1, 2].map((index) => <span key={index} className="size-1.5 animate-bounce rounded-full bg-brand" style={{ animationDelay: index * 120 + "ms" }} />)}</div></div>; }
