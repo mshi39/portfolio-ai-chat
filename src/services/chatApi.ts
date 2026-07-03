@@ -1,3 +1,4 @@
+import { getChatApiUrl } from "../config/widgetRuntime";
 import type { ApiChatMessage, ChatErrorCode, StreamEvent } from "../types/chat";
 
 export class ChatApiError extends Error {
@@ -16,7 +17,7 @@ function parseEvent(line: string): StreamEvent | null {
 export async function streamChat({ messages, onDelta }: StreamChatOptions): Promise<void> {
   let response: Response;
   try {
-    response = await fetch("/api/chat", {
+    response = await fetch(getChatApiUrl(), {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/x-ndjson" },
       body: JSON.stringify({ messages }),

@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/chat.ts": {
-      "includeFiles": "data/knowledge/**"
+      "includeFiles": "data/knowledge/chunks.json"
     }
   }
 }

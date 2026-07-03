@@ -76,7 +76,7 @@ Vite registers a development-only adapter for the production `api/chat.ts` handl
 1. Run `npm run ingest` and commit the generated `data/knowledge/chunks.json`.
 2. Import the repository into Vercel.
 3. Configure `OPENAI_API_KEY` and any optional model/RAG overrides.
-4. Deploy. The statically imported JSON knowledge base is bundled with the API function.
+4. Deploy. Only `data/knowledge/chunks.json` is bundled with the API function; the canonical Markdown source directory is not deployed.
 
 ## Main modules
 
@@ -92,3 +92,19 @@ Vite registers a development-only adapter for the production `api/chat.ts` handl
 ## Updating knowledge later
 
 Edit or add a canonical Markdown file under `data/knowledge/manual/`, run `npm run ingest`, inspect representative queries with `npm run rag:test`, then commit the regenerated chunks file. Never edit embedding arrays by hand.
+
+## Install on Webflow
+
+The production build emits a self-contained `dist/widget.js`. Add this once in Webflow under **Site settings → Custom code → Footer code**, replacing both example origins with the domain Vercel assigned to this project:
+
+```html
+<script
+  src="https://YOUR-PROJECT.vercel.app/widget.js"
+  data-api-base="https://YOUR-PROJECT.vercel.app"
+  defer
+></script>
+```
+
+The loader appends the React widget to `document.body`, renders it inside a Shadow DOM so Webflow styles cannot leak in or out, and sends chat requests to the absolute Vercel API URL. The API accepts browser requests only from `https://melissashi.com` and `https://www.melissashi.com`.
+
+After changing the widget, push to GitHub and let Vercel rebuild it. Webflow does not need to be republished unless the Vercel domain or embed snippet changes.

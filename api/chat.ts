@@ -5,7 +5,11 @@ import { publicError, type ApiErrorCode } from "./lib/errors";
 import { learnMoreMarkdown } from "./rag/attribution";
 import { UNKNOWN_ANSWER } from "./rag/fallback";
 
-interface ApiRequest { method?: string; body?: unknown; }
+interface ApiRequest {
+  method?: string;
+  body?: unknown;
+  headers?: Record<string, string | string[] | undefined>;
+}
 interface ApiResponse {
   status(code: number): ApiResponse;
   json(body: unknown): void;
@@ -21,6 +25,32 @@ interface OpenAIStreamEvent {
     error?: { code?: string; message?: string };
     incomplete_details?: { reason?: string };
   };
+}
+
+
+const ALLOWED_ORIGINS = new Set([
+  "https://melissashi.com",
+  "https://www.melissashi.com",
+]);
+
+function requestOrigin(request: ApiRequest): string | undefined {
+  const value = request.headers?.origin ?? request.headers?.Origin;
+  return Array.isArray(value) ? value[0] : value;
+}
+
+function applyCors(request: ApiRequest, response: ApiResponse): boolean {
+  const origin = requestOrigin(request);
+  if (!origin) return true;
+  if (!ALLOWED_ORIGINS.has(origin)) {
+    console.warn("[chat-api] Blocked request from disallowed origin:", origin);
+    response.status(403).json(publicError("bad_request"));
+    return false;
+  }
+  response.setHeader("Access-Control-Allow-Origin", origin);
+  response.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+  response.setHeader("Vary", "Origin");
+  return true;
 }
 
 const MAX_HISTORY_MESSAGES = 40;
@@ -73,8 +103,13 @@ function startStream(response: ApiResponse) {
 }
 
 export default async function handler(request: ApiRequest, response: ApiResponse) {
+  if (!applyCors(request, response)) return;
+  if (request.method === "OPTIONS") {
+    response.status(204).end();
+    return;
+  }
   if (request.method !== "POST") {
-    response.setHeader("Allow", "POST");
+    response.setHeader("Allow", "POST, OPTIONS");
     return response.status(405).json(publicError("bad_request"));
   }
   if (!process.env.OPENAI_API_KEY) {

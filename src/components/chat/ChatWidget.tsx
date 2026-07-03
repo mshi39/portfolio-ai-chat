@@ -42,7 +42,7 @@ export function ChatWidget() {
     setIsOpen((current) => !current);
   }
 
-  return <aside className="fixed bottom-4 right-4 z-[2147483000] flex flex-col items-end gap-3 sm:bottom-6 sm:right-6" aria-label="Melissa's portfolio assistant">
+  return <aside className="pointer-events-auto fixed bottom-4 right-4 z-[2147483000] flex flex-col items-end gap-3 sm:bottom-6 sm:right-6" aria-label="Melissa's portfolio assistant">
     {isOpen && <ChatPanel messages={messages} draft={draft} isStreaming={isStreaming} onDraftChange={setDraft} onSend={() => submit(draft)} onSuggestionSelect={submit} onClose={() => setIsOpen(false)} />}
     {!isOpen && showCallout && <FirstVisitCallout onOpenChat={toggleChat} onDismiss={dismissCallout} />}
     <ChatLauncher isOpen={isOpen} onToggle={toggleChat} />

@@ -8,7 +8,7 @@ function renderInline(text: string): ReactNode[] {
     const link = part.match(LINK_PATTERN);
     if (link) {
       const external = link[2].startsWith("http");
-      return <a key={index} href={link[2]} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined} className="font-semibold text-brand underline decoration-brand/30 underline-offset-2 hover:decoration-brand">{link[1]}</a>;
+      return <a key={index} href={link[2]} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined} className="break-words font-semibold text-brand [overflow-wrap:anywhere] underline decoration-brand/30 underline-offset-2 hover:decoration-brand">{link[1]}</a>;
     }
     if (part.startsWith("**") && part.endsWith("**")) return <strong key={index} className="font-bold text-ink">{part.slice(2, -2)}</strong>;
     return part;
@@ -16,9 +16,9 @@ function renderInline(text: string): ReactNode[] {
 }
 
 export function MarkdownMessage({ content }: { content: string }) {
-  return <div className="space-y-2">{content.split("\n").map((line, index) => {
+  return <div className="min-w-0 max-w-full space-y-2 break-words [overflow-wrap:anywhere]">{content.split("\n").map((line, index) => {
     if (!line.trim()) return <div key={index} className="h-1" aria-hidden="true" />;
-    if (line.startsWith("- ")) return <div key={index} className="flex gap-2"><span aria-hidden="true">•</span><span>{renderInline(line.slice(2))}</span></div>;
+    if (line.startsWith("- ")) return <div key={index} className="flex min-w-0 gap-2"><span aria-hidden="true">•</span><span className="min-w-0">{renderInline(line.slice(2))}</span></div>;
     return <p key={index}>{renderInline(line)}</p>;
   })}</div>;
 }
