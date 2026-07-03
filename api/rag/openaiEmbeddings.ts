@@ -1,4 +1,4 @@
-import { ragConfig } from "../../config/rag";
+import { ragConfig } from "../../config/rag.js";
 
 interface EmbeddingResponse { data: Array<{ index: number; embedding: number[] }>; }
 

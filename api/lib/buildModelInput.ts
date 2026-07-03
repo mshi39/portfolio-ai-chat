@@ -1,8 +1,8 @@
-import { SYSTEM_PROMPT } from "../../prompts/systemPrompt";
-import type { ApiChatMessage } from "../../src/types/chat";
-import type { SourceLink } from "../../src/types/rag";
-import { deduplicateSources } from "../rag/attribution";
-import { retrieveKnowledge } from "../rag/retrieve";
+import { SYSTEM_PROMPT } from "../../prompts/systemPrompt.js";
+import type { ApiChatMessage } from "../../src/types/chat.js";
+import type { SourceLink } from "../../src/types/rag.js";
+import { deduplicateSources } from "../rag/attribution.js";
+import { retrieveKnowledge } from "../rag/retrieve.js";
 
 export interface ModelInput {
   instructions: string;

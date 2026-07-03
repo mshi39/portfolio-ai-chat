@@ -1,4 +1,4 @@
-import type { RetrievedChunk, SourceLink } from "../../src/types/rag";
+import type { RetrievedChunk, SourceLink } from "../../src/types/rag.js";
 
 function sourceLabel(chunk: RetrievedChunk): string {
   if (chunk.sourceType === "resume") return "View my resume";

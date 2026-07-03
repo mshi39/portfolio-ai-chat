@@ -1,8 +1,8 @@
-import { ragConfig } from "../../config/rag";
-import type { ApiChatMessage } from "../../src/types/chat";
-import type { KnowledgeChunk, RetrievedChunk } from "../../src/types/rag";
-import { getKnowledgeBase } from "./knowledgeBase";
-import { embedQuery } from "./openaiEmbeddings";
+import { ragConfig } from "../../config/rag.js";
+import type { ApiChatMessage } from "../../src/types/chat.js";
+import type { KnowledgeChunk, RetrievedChunk } from "../../src/types/rag.js";
+import { getKnowledgeBase } from "./knowledgeBase.js";
+import { embedQuery } from "./openaiEmbeddings.js";
 
 export function cosineSimilarity(left: number[], right: number[]): number {
   if (!left.length || left.length !== right.length) return -1;

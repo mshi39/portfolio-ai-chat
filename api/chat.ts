@@ -1,9 +1,9 @@
-import { openAIConfig } from "../config/openai";
-import type { ApiChatMessage, StreamEvent } from "../src/types/chat";
-import { buildModelInput } from "./lib/buildModelInput";
-import { publicError, type ApiErrorCode } from "./lib/errors";
-import { learnMoreMarkdown } from "./rag/attribution";
-import { UNKNOWN_ANSWER } from "./rag/fallback";
+import { openAIConfig } from "../config/openai.js";
+import type { ApiChatMessage, StreamEvent } from "../src/types/chat.js";
+import { buildModelInput } from "./lib/buildModelInput.js";
+import { publicError, type ApiErrorCode } from "./lib/errors.js";
+import { learnMoreMarkdown } from "./rag/attribution.js";
+import { UNKNOWN_ANSWER } from "./rag/fallback.js";
 
 interface ApiRequest {
   method?: string;

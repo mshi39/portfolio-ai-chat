@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { ragConfig } from "../../config/rag";
-import type { KnowledgeBase } from "../../src/types/rag";
+import { ragConfig } from "../../config/rag.js";
+import type { KnowledgeBase } from "../../src/types/rag.js";
 
 let cachedKnowledgeBase: Promise<KnowledgeBase> | null = null;
 
