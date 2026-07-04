@@ -1,3 +1,14 @@
-import { CloseIcon } from "../icons/Icons";
-interface Props { onOpenChat: () => void; onDismiss: () => void; }
-export function FirstVisitCallout({ onOpenChat, onDismiss }: Props) { return <div role="status" className="relative animate-panel-in rounded-2xl border-2 border-brand/15 bg-brand-wash py-3 pl-4 pr-10 text-sm font-semibold leading-5 text-ink shadow-panel"><button type="button" onClick={onOpenChat} className="max-w-56 text-left transition hover:text-brand">Chat with me to learn more about Melissa! <span aria-hidden="true">🌟</span></button><button type="button" onClick={onDismiss} aria-label="Dismiss chat introduction" className="absolute right-2 top-2 flex size-7 items-center justify-center rounded-full text-brand/60 transition hover:bg-brand-soft hover:text-brand"><CloseIcon className="size-4" /></button><span aria-hidden="true" className="absolute -bottom-1.5 right-6 size-3 rotate-45 border-b-2 border-r-2 border-brand/15 bg-brand-wash" /></div>; }
+interface Props {
+  onOpenChat: () => void;
+}
+
+export function FirstVisitCallout({ onOpenChat }: Props) {
+  return (
+    <div role="status" className="relative animate-panel-in rounded-2xl border-2 border-brand/15 bg-brand-wash px-4 py-3 text-sm font-semibold leading-5 text-ink shadow-panel">
+      <button type="button" onClick={onOpenChat} className="max-w-56 text-left transition hover:text-brand">
+        Want to learn more about me? Come chat!
+      </button>
+      <span aria-hidden="true" className="absolute -bottom-1.5 right-6 size-3 rotate-45 border-b-2 border-r-2 border-brand/15 bg-brand-wash" />
+    </div>
+  );
+}

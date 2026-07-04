@@ -3,12 +3,22 @@ import type { ReactNode } from "react";
 const INLINE_PATTERN = /(\*\*[^*]+\*\*|\[[^\]]+\]\((?:https?:\/\/|mailto:)[^)]+\))/g;
 const LINK_PATTERN = /^\[([^\]]+)\]\(((?:https?:\/\/|mailto:)[^)]+)\)$/;
 
+function isPortfolioLink(href: string): boolean {
+  if (!href.startsWith("http")) return false;
+  try {
+    const hostname = new URL(href).hostname.toLowerCase().replace(/^www\./, "");
+    return hostname === "melissashi.com";
+  } catch {
+    return false;
+  }
+}
+
 function renderInline(text: string): ReactNode[] {
   return text.split(INLINE_PATTERN).filter(Boolean).map((part, index) => {
     const link = part.match(LINK_PATTERN);
     if (link) {
-      const external = link[2].startsWith("http");
-      return <a key={index} href={link[2]} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined} className="break-words font-semibold text-brand [overflow-wrap:anywhere] underline decoration-brand/30 underline-offset-2 hover:decoration-brand">{link[1]}</a>;
+      const opensNewTab = !isPortfolioLink(link[2]);
+      return <a key={index} href={link[2]} target={opensNewTab ? "_blank" : undefined} rel={opensNewTab ? "noreferrer" : undefined} className="break-words font-semibold text-brand [overflow-wrap:anywhere] underline decoration-brand/30 underline-offset-2 hover:decoration-brand">{link[1]}</a>;
     }
     if (part.startsWith("**") && part.endsWith("**")) return <strong key={index} className="font-bold text-ink">{part.slice(2, -2)}</strong>;
     return part;
