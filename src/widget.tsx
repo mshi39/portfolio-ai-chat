@@ -1,8 +1,11 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { inject } from '@vercel/analytics';
 import { ChatWidget } from "./components/chat/ChatWidget";
 import { setWidgetRuntimeConfig } from "./config/widgetRuntime";
 import widgetStyles from "./styles/globals.css?inline";
+
+inject();
 
 const HOST_ID = "melissa-portfolio-chat";
 const loaderScript = document.currentScript as HTMLScriptElement | null;
