@@ -3,7 +3,7 @@ import { basename, join, relative } from "node:path";
 import { cleanText } from "./text.mjs";
 const MANUAL_ROOT = "data/knowledge/manual";
 const DEFAULTS = {
-  "resume.md": { title: "Melissa Shi Resume", sourceType: "resume", sourceUrl: "https://docs.google.com/document/d/1Fqb5aADwMucxJWs6w3dG7t9gxN_xnQDD/edit?usp=sharing", tags: ["resume", "experience", "skills"] },
+  "resume.md": { title: "Melissa Shi Resume", sourceType: "resume", sourceUrl: "https://drive.google.com/file/d/1jpwHy6RFQeSLDYWaqkUoXuedW34rSur7/view?usp=sharing", tags: ["resume", "experience", "skills"] },
   "linkedin.md": { title: "Melissa Shi LinkedIn", sourceType: "linkedin", sourceUrl: "https://www.linkedin.com/in/melissaxshi", tags: ["linkedin", "experience", "career"] },
   "medium.md": { title: "How to Build Trust with Clients and Showcase UX Value in a Short Time", sourceType: "medium", sourceUrl: "https://medium.com/design-at-exxonmobil/how-to-build-trust-with-clients-and-showcase-ux-value-in-a-short-time-50c1c7858211", tags: ["medium", "ux value", "client trust", "exxonmobil"] },
 };

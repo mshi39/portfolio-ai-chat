@@ -1,4 +1,3 @@
-<!-- MANUAL_FALLBACK_TEMPLATE -->
 # Melissa Shi
 
 **Email:** melissa.x.shi@gmail.com  
