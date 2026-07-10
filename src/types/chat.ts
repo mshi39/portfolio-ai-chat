@@ -13,6 +13,14 @@ export interface ApiChatMessage {
   content: string;
 }
 
+export interface PageContext {
+  currentUrl: string;
+  pageTitle: string;
+  pageType: string;
+  projectOrCaseStudyName: string;
+  pageSlug: string;
+}
+
 export type ChatErrorCode =
   | "bad_request"
   | "configuration_error"

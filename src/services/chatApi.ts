@@ -1,11 +1,11 @@
 import { getChatApiUrl } from "../config/widgetRuntime";
-import type { ApiChatMessage, ChatErrorCode, StreamEvent } from "../types/chat";
+import type { ApiChatMessage, ChatErrorCode, PageContext, StreamEvent } from "../types/chat";
 
 export class ChatApiError extends Error {
   constructor(public readonly code: ChatErrorCode, message: string) { super(message); this.name = "ChatApiError"; }
 }
 
-interface StreamChatOptions { messages: ApiChatMessage[]; onDelta: (delta: string) => void; }
+interface StreamChatOptions { messages: ApiChatMessage[]; pageContext?: PageContext; onDelta: (delta: string) => void; }
 
 const FALLBACK_MESSAGE = "I'm having trouble connecting right now. Please try again in a moment.";
 
@@ -14,13 +14,13 @@ function parseEvent(line: string): StreamEvent | null {
   try { return JSON.parse(line) as StreamEvent; } catch { throw new ChatApiError("upstream_error", FALLBACK_MESSAGE); }
 }
 
-export async function streamChat({ messages, onDelta }: StreamChatOptions): Promise<void> {
+export async function streamChat({ messages, pageContext, onDelta }: StreamChatOptions): Promise<void> {
   let response: Response;
   try {
     response = await fetch(getChatApiUrl(), {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/x-ndjson" },
-      body: JSON.stringify({ messages }),
+      body: JSON.stringify({ messages, pageContext }),
     });
   } catch {
     throw new ChatApiError("upstream_error", FALLBACK_MESSAGE);

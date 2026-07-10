@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChatApiError, streamChat } from "../services/chatApi";
 import type { ApiChatMessage, ChatMessage } from "../types/chat";
+import { collectPageContext } from "../utils/pageContext";
 
 const SESSION_KEY = "melissa-ai-chat-history";
 const FALLBACK_ERROR = "I'm having trouble connecting right now. Please try again in a moment.";
@@ -45,6 +46,7 @@ export function useChat() {
     try {
       await streamChat({
         messages: requestHistory,
+        pageContext: collectPageContext(),
         onDelta: (delta) => setMessages((current) => current.map((message) =>
           message.id === assistantMessage.id ? { ...message, content: message.content + delta } : message
         )),

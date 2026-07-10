@@ -1,5 +1,5 @@
 import { openAIConfig } from "../config/openai.js";
-import type { ApiChatMessage, StreamEvent } from "../src/types/chat.js";
+import type { ApiChatMessage, PageContext, StreamEvent } from "../src/types/chat.js";
 import { buildModelInput } from "./lib/buildModelInput.js";
 import { publicError, type ApiErrorCode } from "./lib/errors.js";
 import { learnMoreMarkdown } from "./rag/attribution.js";
@@ -26,7 +26,6 @@ interface OpenAIStreamEvent {
     incomplete_details?: { reason?: string };
   };
 }
-
 
 const ALLOWED_ORIGINS = new Set([
   "https://melissashi.com",
@@ -56,13 +55,37 @@ function applyCors(request: ApiRequest, response: ApiResponse): boolean {
 const MAX_HISTORY_MESSAGES = 40;
 const MAX_MESSAGE_LENGTH = 4_000;
 
-function parseMessages(body: unknown): ApiChatMessage[] | null {
+function parseBody(body: unknown): Record<string, unknown> | null {
   let parsed = body;
   if (typeof body === "string") {
     try { parsed = JSON.parse(body); } catch { return null; }
   }
-  if (!parsed || typeof parsed !== "object" || !("messages" in parsed)) return null;
-  const messages = (parsed as { messages?: unknown }).messages;
+  return parsed && typeof parsed === "object" ? parsed as Record<string, unknown> : null;
+}
+
+function cleanOptionalString(value: unknown, maxLength = 500): string {
+  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
+}
+
+function parsePageContext(body: unknown): PageContext | null {
+  const parsed = parseBody(body);
+  if (!parsed || !("pageContext" in parsed)) return null;
+  const pageContext = parsed.pageContext;
+  if (!pageContext || typeof pageContext !== "object") return null;
+  const item = pageContext as Record<string, unknown>;
+  return {
+    currentUrl: cleanOptionalString(item.currentUrl, 1_000),
+    pageTitle: cleanOptionalString(item.pageTitle),
+    pageType: cleanOptionalString(item.pageType, 80),
+    projectOrCaseStudyName: cleanOptionalString(item.projectOrCaseStudyName),
+    pageSlug: cleanOptionalString(item.pageSlug, 160),
+  };
+}
+
+function parseMessages(body: unknown): ApiChatMessage[] | null {
+  const parsed = parseBody(body);
+  if (!parsed || !("messages" in parsed)) return null;
+  const messages = parsed.messages;
   if (!Array.isArray(messages) || messages.length === 0 || messages.length > MAX_HISTORY_MESSAGES) return null;
   const valid = messages.every((message) => {
     if (!message || typeof message !== "object") return false;
@@ -118,17 +141,21 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   }
   const messages = parseMessages(request.body);
   if (!messages) return response.status(400).json(publicError("bad_request"));
+  const pageContext = parsePageContext(request.body);
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), openAIConfig.timeoutMs);
   let streamStarted = false;
 
   try {
-    const modelInput = await buildModelInput(messages);
+    const modelInput = await buildModelInput(messages, pageContext);
     if (!modelInput.hasContext) {
       startStream(response);
       streamStarted = true;
-      sendEvent(response, { type: "delta", delta: UNKNOWN_ANSWER });
+      const fallbackAnswer = modelInput.contextResolution.shouldAskClarifyingQuestion
+        ? "Which project, role, or experience would you like me to talk about?"
+        : UNKNOWN_ANSWER;
+      sendEvent(response, { type: "delta", delta: fallbackAnswer });
       sendEvent(response, { type: "done" });
       response.end();
       return;
