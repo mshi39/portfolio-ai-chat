@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "dev:full": "npx vercel dev",
     "ingest": "node scripts/ingest.mjs",
-    "rag:test": "node scripts/rag-test.mjs"
+    "rag:test": "node scripts/rag-test.mjs",
+    "test:chapters": "node --experimental-strip-types --test scripts/chapter-links.test.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",

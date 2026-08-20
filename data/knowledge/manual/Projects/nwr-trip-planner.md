@@ -1,6 +1,6 @@
 
 Project Name: Nemacolin Woodlands Resort Trip Planner
-Source URL: https://www.melissashi.com/work/nwrtripplanner
+Source URL: https://www.melissashi.com/work/resort-trip-planner
 Source Type: Portfolio
 Access: Password protected
 Tags:

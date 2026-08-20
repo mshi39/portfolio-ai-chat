@@ -37,12 +37,27 @@ export function chunkDocument(document, options = {}) {
   const targetSize = options.targetSize ?? 1200;
   const maxSize = options.maxSize ?? 1700;
   const paragraphs = cleanText(document.content).split(/\n{2,}|(?<=[.!?])\n/).map(cleanText).filter(Boolean);
+  const chaptersByHeading = new Map((document.chapterMappings ?? []).flatMap((chapter) =>
+    chapter.knowledgeHeadings.map((heading) => [heading.toLowerCase(), chapter])
+  ));
   const groups = [];
   let current = [];
+  let currentChapter;
   let length = 0;
+  const flush = () => {
+    if (current.length) groups.push({ paragraphs: current, chapter: currentChapter });
+  };
   for (const paragraph of paragraphs) {
+    const heading = paragraph.match(/^#{1,6}\s+(.+)$/)?.[1]?.trim().toLowerCase();
+    const nextChapter = heading ? chaptersByHeading.get(heading) : undefined;
+    if (nextChapter && nextChapter.id !== currentChapter?.id) {
+      flush();
+      current = [];
+      length = 0;
+      currentChapter = nextChapter;
+    }
     if (current.length && (length + paragraph.length > maxSize || length >= targetSize)) {
-      groups.push(current);
+      flush();
       const overlap = current.at(-1);
       current = overlap && overlap.length < 350 ? [overlap] : [];
       length = current.reduce((sum, item) => sum + item.length + 2, 0);
@@ -50,13 +65,14 @@ export function chunkDocument(document, options = {}) {
     current.push(paragraph);
     length += paragraph.length + 2;
   }
-  if (current.length) groups.push(current);
+  flush();
   return groups.map((group, index) => ({
-    id: createHash("sha256").update(document.sourceUrl + "|" + index + "|" + group.join("\n\n")).digest("hex").slice(0, 20),
+    id: createHash("sha256").update(document.sourceUrl + "|" + index + "|" + group.paragraphs.join("\n\n")).digest("hex").slice(0, 20),
     title: groups.length > 1 ? document.title + " — Part " + (index + 1) : document.title,
-    content: group.join("\n\n"), sourceType: document.sourceType, sourceUrl: document.sourceUrl,
+    content: group.paragraphs.join("\n\n"), sourceType: document.sourceType, sourceUrl: document.sourceUrl,
     pageTitle: document.pageTitle || document.title,
     ...(document.projectName ? { projectName: document.projectName } : {}),
+    ...(group.chapter ? { chapterId: group.chapter.id, chapterLabel: group.chapter.label } : {}),
     tags: document.tags ?? [], ...(document.lastUpdated ? { lastUpdated: document.lastUpdated } : {}),
   }));
 }

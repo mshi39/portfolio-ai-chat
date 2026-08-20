@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "projects": {
+    "ai-powered-feedback-intelligence-platform.md": {
+      "pageSlug": "ai-powered-feedback-intelligence-platform",
+      "sourceUrl": "https://www.melissashi.com/work/ai-powered-feedback-intelligence-platform",
+      "chapters": [
+        { "id": "opportunity", "label": "The Opportunity", "knowledgeHeadings": ["Overview", "Impact", "My Role", "Timeline"] },
+        { "id": "workflow-research", "label": "Workflow research", "knowledgeHeadings": ["Design Process", "Phase 1 — Discovery & Research"] },
+        { "id": "product-architecture", "label": "Product architecture", "knowledgeHeadings": ["Phase 2 — Define the Product Direction"] },
+        { "id": "concept-validation", "label": "Concept validation", "knowledgeHeadings": ["Phase 3 — Validate Through Design"] },
+        { "id": "feedback-pipeline", "label": "Feedback pipeline", "knowledgeHeadings": ["Phase 4 — Refine Around User Value", "Centralized Customer Intelligence", "End-to-End Insight Pipeline"] },
+        { "id": "trust-in-ai", "label": "Trust in AI", "knowledgeHeadings": ["AI-Powered Insight Generation", "Human-in-the-Loop AI"] },
+        { "id": "collaboration", "label": "Collaboration", "knowledgeHeadings": [] },
+        { "id": "projected-impact", "label": "Projected impact", "knowledgeHeadings": ["Final Impact"] },
+        { "id": "demonstrated-skills", "label": "Demonstrated skills", "knowledgeHeadings": [] }
+      ]
+    },
+    "voc-revamp.md": {
+      "pageSlug": "voice-of-the-customer-admin-portal-revamp",
+      "sourceUrl": "https://www.melissashi.com/work/voice-of-the-customer-admin-portal-revamp",
+      "chapters": [
+        { "id": "overview", "label": "Overview", "knowledgeHeadings": ["Overview", "My Role", "What is Voice of the Customer?"] },
+        { "id": "challenge", "label": "Challenge", "knowledgeHeadings": ["Phase 1 — Understanding the System"] },
+        { "id": "scope", "label": "Scope & approach", "knowledgeHeadings": ["MVP Scope", "Primary Users", "Design Process"] },
+        { "id": "architecture", "label": "Architecture", "knowledgeHeadings": ["Phase 3 — Restructuring Public Programs vs. Recruitment"] },
+        { "id": "guardrails", "label": "Guardrails", "knowledgeHeadings": ["Phase 2 — Provide Guardrails During Program Creation"] },
+        { "id": "visibility", "label": "Customer visibility", "knowledgeHeadings": ["Phase 4 — Help Program Owners Think Like Customers"] },
+        { "id": "workflows", "label": "Real workflows", "knowledgeHeadings": ["Phase 5 — Reducing Bottlenecks"] },
+        { "id": "scalability", "label": "Scalability", "knowledgeHeadings": ["Phase 6 — Designing for Scalability"] },
+        { "id": "collaboration", "label": "Collaboration", "knowledgeHeadings": [] },
+        { "id": "results", "label": "Results", "knowledgeHeadings": ["Results"] }
+      ]
+    },
+    "sales-assessment-platform.md": {
+      "pageSlug": "sales-assessment-platform-ai-integration",
+      "sourceUrl": "https://www.melissashi.com/work/sales-assessment-platform-ai-integration",
+      "chapters": [
+        { "id": "introduction", "label": "Introduction", "knowledgeHeadings": ["Introduction", "The Challenge", "My Design Principles"] },
+        { "id": "collaboration-model", "label": "AI collaboration", "knowledgeHeadings": ["Selling a New Vision: AI Collaboration Model"] },
+        { "id": "platform-expansion", "label": "Platform expansion", "knowledgeHeadings": ["Expanding the Experience Across the Platform"] },
+        { "id": "product-vision", "label": "Product vision", "knowledgeHeadings": ["Defining the Long-Term Product Vision"] },
+        { "id": "outcome", "label": "Outcome", "knowledgeHeadings": ["Outcome"] },
+        { "id": "reflection", "label": "Reflection", "knowledgeHeadings": ["Reflection"] }
+      ]
+    },
+    "operations-information-hub.md": {
+      "pageSlug": "operations-information-hub",
+      "sourceUrl": "https://www.melissashi.com/work/operations-information-hub",
+      "chapters": [
+        { "id": "overview", "label": "Overview", "knowledgeHeadings": ["Overview", "My Role"] },
+        { "id": "context", "label": "Context", "knowledgeHeadings": ["Background"] },
+        { "id": "build-belief", "label": "Build belief", "knowledgeHeadings": ["Obstacle 1 — Building Stakeholder Confidence"] },
+        { "id": "operator-model", "label": "Operator model", "knowledgeHeadings": ["Obstacle 2 — Understanding the Operator Mental Model"] },
+        { "id": "expand-scope", "label": "Expand scope", "knowledgeHeadings": ["Obstacle 3 — Uncovering Offline Inefficiencies"] },
+        { "id": "results", "label": "Results", "knowledgeHeadings": ["Outcome"] }
+      ]
+    },
+    "nwr-trip-planner.md": {
+      "pageSlug": "resort-trip-planner",
+      "sourceUrl": "https://www.melissashi.com/work/resort-trip-planner",
+      "chapters": [
+        { "id": "overview", "label": "Overview", "knowledgeHeadings": ["Overview", "My Role", "Results"] },
+        { "id": "context", "label": "Context", "knowledgeHeadings": ["Research Phase", "Quantitative Analysis", "Target Audience", "Exploratory Research", "Contextual Inquiry — Resort Staff", "Contextual Inquiry — Prospective Guests", "Machine Learning Analysis", "Research Conclusions"] },
+        { "id": "motivations", "label": "Guest motivations", "knowledgeHeadings": ["Key Findings"] },
+        { "id": "journey", "label": "Reservation journey", "knowledgeHeadings": ["Design Process", "Iteration 1 — Reservation Approaches"] },
+        { "id": "flexibility", "label": "Flexible planning", "knowledgeHeadings": ["Iteration 2 — Flexible Itinerary Planning"] },
+        { "id": "guidance", "label": "Guided control", "knowledgeHeadings": ["Iteration 3 — Guided Planning", "Iteration 4 — Refinement"] },
+        { "id": "personalization", "label": "Personalization", "knowledgeHeadings": ["Activity Categorization", "Recommendation Engine"] },
+        { "id": "results", "label": "Results", "knowledgeHeadings": ["Final Solution", "Design Principles", "Visual Design", "Business Outcomes", "Guest Experience"] }
+      ]
+    },
+    "enterprise-search-research.md": {
+      "pageSlug": "enterprise-search-generative-ai",
+      "sourceUrl": "https://www.melissashi.com/work/enterprise-search-generative-ai",
+      "chapters": [
+        { "id": "background", "label": "Context", "knowledgeHeadings": ["Background", "Outcome", "Timeline", "Role"] },
+        { "id": "goals-methods", "label": "Approach", "knowledgeHeadings": ["Research Approach", "1. Define Research Goals & Methods"] },
+        { "id": "survey-findings", "label": "Survey", "knowledgeHeadings": ["2. Survey Findings"] },
+        { "id": "interviews", "label": "Interviews", "knowledgeHeadings": ["3. User Interviews"] },
+        { "id": "key-insights", "label": "Insights", "knowledgeHeadings": ["4. Key Research Insights", "Insight 1 — Concierge's Core Value", "Insight 2 — Drivers of Product Abandonment", "Insight 3 — Fragmented Search Experience"] },
+        { "id": "future-state", "label": "Future state", "knowledgeHeadings": ["Insight 4 — Desired Future Experience"] },
+        { "id": "ai-attitudes", "label": "AI attitudes", "knowledgeHeadings": ["Insight 5 — Attitudes Toward Cisco AI Assistant"] },
+        { "id": "recommendations", "label": "Recommendations", "knowledgeHeadings": ["5. Product Strategy Recommendations"] },
+        { "id": "outcomes", "label": "Outcomes", "knowledgeHeadings": ["Final Outcomes"] }
+      ]
+    },
+    "cost-analysis-research.md": {
+      "pageSlug": "evaluative-research-cost-analysis-tool",
+      "sourceUrl": "https://www.melissashi.com/work/evaluative-research-cost-analysis-tool",
+      "chapters": [
+        { "id": "overview", "label": "Overview", "knowledgeHeadings": ["Overview", "My Role"] },
+        { "id": "context", "label": "Context", "knowledgeHeadings": ["Background", "Problem", "Solution"] },
+        { "id": "diagnose-alignment", "label": "Diagnose alignment", "knowledgeHeadings": ["Step 1 — Stakeholder Interviews"] },
+        { "id": "earn-research", "label": "Earn research", "knowledgeHeadings": ["Step 2 — Heuristic Evaluation"] },
+        { "id": "focus-study", "label": "Focus the study", "knowledgeHeadings": ["Research Objectives", "Step 3 — Usability Testing & Follow-Up Interviews"] },
+        { "id": "product-direction", "label": "Product direction", "knowledgeHeadings": ["Research Outcomes"] },
+        { "id": "results", "label": "Results", "knowledgeHeadings": ["Outcomes"] }
+      ]
+    }
+  }
+}

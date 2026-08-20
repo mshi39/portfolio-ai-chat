@@ -8,6 +8,8 @@ export interface KnowledgeChunk {
   sourceUrl: string;
   pageTitle: string;
   projectName?: string;
+  chapterId?: string;
+  chapterLabel?: string;
   tags: string[];
   lastUpdated?: string;
   embedding: number[];
@@ -28,4 +30,6 @@ export interface SourceLink {
   label: string;
   url: string;
   sourceType: KnowledgeSourceType;
+  chapterId?: string;
+  chapterLabel?: string;
 }

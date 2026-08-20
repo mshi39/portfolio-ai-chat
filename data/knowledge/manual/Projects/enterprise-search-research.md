@@ -1,6 +1,6 @@
 
 Project Name: Research: Value of Internal Enterprise Search in the Age of Generative AI
-Source URL: https://www.melissashi.com/work/research-value-of-internal-enterprise-search-in-the-age-of-generative-ai
+Source URL: https://www.melissashi.com/work/enterprise-search-generative-ai
 Source Type: Portfolio
 Access: Password protected
 Tags:

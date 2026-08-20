@@ -1,6 +1,6 @@
 
 Project Name: Voice of the Customer (VOC) Admin Portal Revamp
-Source URL: https://www.melissashi.com/work/voc-revamp
+Source URL: https://www.melissashi.com/work/voice-of-the-customer-admin-portal-revamp
 Source Type: Portfolio
 Access: Password protected
 Tags:

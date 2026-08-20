@@ -1,6 +1,6 @@
 
 Project Name: Evaluative Research on Cost Analysis Tool
-Source URL: https://www.melissashi.com/work/evaluative-research-on-cost-analysis-tool-copy
+Source URL: https://www.melissashi.com/work/evaluative-research-cost-analysis-tool
 Source Type: Portfolio
 Access: Not password protected
 Tags:

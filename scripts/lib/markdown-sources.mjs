@@ -2,6 +2,7 @@ import { readdir, readFile } from "node:fs/promises";
 import { basename, join, relative } from "node:path";
 import { cleanText } from "./text.mjs";
 const MANUAL_ROOT = "data/knowledge/manual";
+const CHAPTER_MAPPINGS_PATH = "data/knowledge/chapter-mappings.json";
 const DEFAULTS = {
   "resume.md": { title: "Melissa Shi Resume", sourceType: "resume", sourceUrl: "https://drive.google.com/file/d/1jpwHy6RFQeSLDYWaqkUoXuedW34rSur7/view?usp=sharing", tags: ["resume", "experience", "skills"] },
   "linkedin.md": { title: "Melissa Shi LinkedIn", sourceType: "linkedin", sourceUrl: "https://www.linkedin.com/in/melissaxshi", tags: ["linkedin", "experience", "career"] },
@@ -60,6 +61,7 @@ function redactSecrets(text) {
     .replace(/<!--\s*MANUAL_FALLBACK_TEMPLATE\s*-->/gi, "");
 }
 export async function loadMarkdownKnowledge() {
+  const chapterMappings = JSON.parse(await readFile(CHAPTER_MAPPINGS_PATH, "utf8")).projects;
   const documents = [];
   for (const path of await markdownPaths()) {
     const raw = await readFile(path, "utf8");
@@ -73,7 +75,8 @@ export async function loadMarkdownKnowledge() {
     const sourceUrl = parsed.metadata.sourceurl || header.sourceUrl || headingValue(raw, "Source URL") || defaults.sourceUrl || "";
     const title = parsed.metadata.title || projectName || firstTitle(body, basename(path, ".md"));
     const tags = Array.isArray(parsed.metadata.tags) ? parsed.metadata.tags : header.tags.length ? header.tags : defaults.tags ?? [];
-    documents.push({ title, content: body, sourceType: normalizeSourceType(parsed.metadata.sourcetype || header.sourceType || defaults.sourceType, path), sourceUrl, pageTitle: title, ...(projectName ? { projectName } : {}), tags: [...new Set([...tags, "canonical-markdown"])], lastUpdated: parsed.metadata.lastupdated || header.lastUpdated, canonicalFile: relative(MANUAL_ROOT, path).replaceAll("\\", "/") });
+    const canonicalFile = relative(MANUAL_ROOT, path).replaceAll("\\", "/");
+    documents.push({ title, content: body, sourceType: normalizeSourceType(parsed.metadata.sourcetype || header.sourceType || defaults.sourceType, path), sourceUrl, pageTitle: title, ...(projectName ? { projectName } : {}), tags: [...new Set([...tags, "canonical-markdown"])], lastUpdated: parsed.metadata.lastupdated || header.lastUpdated, canonicalFile, chapterMappings: chapterMappings[basename(path)]?.chapters ?? [] });
   }
   return documents;
 }

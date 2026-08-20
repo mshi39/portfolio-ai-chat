@@ -1,6 +1,7 @@
 import type { RetrievedChunk, SourceLink } from "../../src/types/rag.js";
 
 function sourceLabel(chunk: RetrievedChunk): string {
+  if (chunk.chapterLabel) return "View " + chunk.chapterLabel;
   if (chunk.sourceType === "resume") return "View my resume";
   if (chunk.sourceType === "linkedin") return "View my LinkedIn";
   if (chunk.sourceType === "medium") return "Read the full article";
@@ -12,9 +13,10 @@ export function deduplicateSources(chunks: RetrievedChunk[]): SourceLink[] {
   const seen = new Set<string>();
   const sources: SourceLink[] = [];
   for (const chunk of chunks) {
-    if (!chunk.sourceUrl || seen.has(chunk.sourceUrl)) continue;
-    seen.add(chunk.sourceUrl);
-    sources.push({ label: sourceLabel(chunk), url: chunk.sourceUrl, sourceType: chunk.sourceType });
+    const url = chunk.chapterId ? chunk.sourceUrl.split("#")[0] + "#" + chunk.chapterId : chunk.sourceUrl;
+    if (!url || seen.has(url)) continue;
+    seen.add(url);
+    sources.push({ label: sourceLabel(chunk), url, sourceType: chunk.sourceType, chapterId: chunk.chapterId, chapterLabel: chunk.chapterLabel });
   }
   return sources;
 }
